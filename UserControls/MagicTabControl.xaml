@@ -1,0 +1,45 @@
+﻿<UserControl x:Name="userControl" x:Class="DiplomaStorage.UserControls.MagicTabControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DiplomaStorage.UserControls" xmlns:emoji="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             mc:Ignorable="d">
+
+    <ListBox ItemsSource="{Binding Diploms}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Student.Group.Fnumber}" HorizontalAlignment="Center" />
+                        <emoji:TextBlock Style="{Binding Mode=OneWay, Source={StaticResource EmojeText}}" />
+                    </StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Student}" />
+                        <TextBlock
+                                                    Grid.Row="1" Text="{Binding comment}"
+                                                    MaxWidth="177"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center" />
+
+                        <Button Grid.Row="2" Content="открыть"
+                                                Command="{Binding DataContext.OpenDiploma, ElementName=userControl}"
+                                                CommandParameter="{Binding}" />
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid>
+                </UniformGrid>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+    </ListBox>
+</UserControl>
