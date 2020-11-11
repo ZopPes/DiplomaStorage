@@ -14,7 +14,6 @@
         <local:MainVievModel />
     </Window.DataContext>
     <Window.Resources>
-
         <CollectionViewSource x:Key="cvsTabs" Source="{Binding Path=Tabs}" />
     </Window.Resources>
     <Grid x:Name="grid">
