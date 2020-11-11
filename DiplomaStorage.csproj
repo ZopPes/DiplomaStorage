@@ -76,17 +76,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\AddGroupControl.xaml.cs">
+      <DependentUpon>AddGroupControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\magicMenu.xaml.cs">
-      <DependentUpon>magicMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\MagicTabControl.xaml.cs">
       <DependentUpon>MagicTabControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\MagicTreeView.xaml.cs">
-      <DependentUpon>MagicTreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Tab.cs" />
     <Compile Include="UserControls\TabDiploma.cs" />
@@ -104,19 +101,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\AddGroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\magicMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\MagicTabControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\MagicTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
