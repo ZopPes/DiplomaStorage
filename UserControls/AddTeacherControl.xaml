@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="DiplomaStorage.UserControls.AddTeacherControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DiplomaStorage.UserControls"
+             mc:Ignorable="d" 
+             >
+    <Grid  Background="#FFE4D6D6">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button Content="X" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Command="{Binding CloseAddTeacher}" />
+        <Label Grid.Row="1" Content="фамилия*" />
+        <TextBox Grid.Column="1" Grid.Row="1"
+                                  Text="{Binding NewTeacher.Pioples.lastname, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Content="имя*"  Grid.Row="2" />
+
+        <TextBox Grid.Row="2" Text="{Binding NewTeacher.Pioples.name,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" />
+        <Label Content="отчество*" Grid.Row="3" />
+        <TextBox  Grid.Row="3" Text="{ Binding NewTeacher.Pioples.patronymic,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2" />
+        <Label Content="выберите группу*" Grid.Row="4" />
+        <Button Margin="0,10,0,0"
+                                Content="добавить"
+                                Grid.Row="5"
+                                Grid.ColumnSpan="2"
+                                Command="{Binding AddTeacher}" />
+    </Grid>
+
+</UserControl>

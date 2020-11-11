@@ -76,8 +76,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\AddDiplomaControl.xaml.cs">
+      <DependentUpon>AddDiplomaControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AddGroupControl.xaml.cs">
       <DependentUpon>AddGroupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AddStudentControl.xaml.cs">
+      <DependentUpon>AddStudentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AddTeacherControl.xaml.cs">
+      <DependentUpon>AddTeacherControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
@@ -101,7 +110,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\AddDiplomaControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\AddGroupControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AddStudentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AddTeacherControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
