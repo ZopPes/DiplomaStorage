@@ -14,7 +14,7 @@
         <local:MainVievModel />
     </Window.DataContext>
     <Window.Resources>
-        <CollectionViewSource x:Key="cvsTabs" Source="{Binding Path=Tabs}" />
+        <CollectionViewSource x:Key="cvsTabs" Source="{Binding Path=DiplomaTabs}" />
     </Window.Resources>
     <Grid x:Name="grid">
         <Grid IsEnabled="{Binding EnableMain}">
@@ -68,7 +68,7 @@
                         </DataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
-                <TabControl Grid.Column="1" Grid.ColumnSpan="2">
+                <TabControl Grid.Column="1" Grid.ColumnSpan="2" >
                     <TabControl.ItemsSource>
                         <CompositeCollection>
                             <TabItem Header="Все дипломы">

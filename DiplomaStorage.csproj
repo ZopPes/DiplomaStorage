@@ -91,6 +91,7 @@
     <Compile Include="UserControls\Tab.cs" />
     <Compile Include="UserControls\TabDiploma.cs" />
     <Compile Include="ViewModel\MainVievModel.cs" />
+    <Compile Include="ViewModel\MainVievModel1.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
