@@ -196,9 +196,13 @@ namespace DiplomaStorage
 
         public lamdaCommand<Group> AddTab { get; }
 
+        public lamdaCommand AddInterTab { get; }
+
         public lamdaCommand<Diploms> OpenDiploma { get; }
 
         #endregion Command
+
+        public ObservableCollection<InterTabDiploma> interTabs { get; set; }
 
         public MainVievModel()
         {
@@ -263,11 +267,27 @@ namespace DiplomaStorage
             AddTab = new lamdaCommand<Group>(OnAddTab);
             OpenDiploma = new lamdaCommand<Diploms>(OnOpenDiploma);
 
+            interTabs = new ObservableCollection<InterTabDiploma>();
+            interTabs.CollectionChanged += Tabs_CollectionChanged;
+            AddInterTab = new lamdaCommand(OnAddInterTab);
 
-            TabDiploma tabDiploma = new TabDiploma(DataContext.Diploms);
-            tabDiploma.name = "тест";
+            var f = new InterTabDiploma(ViewDiploms);
+            f.name = "test";
+            interTabs.Add(f);
 
-            Tabs.Add(tabDiploma);
+            var ff = new TabDiploma(ViewDiploms);
+            ff.name = "test";
+            Tabs.Add(ff);
+        }
+
+       
+
+        private void OnAddInterTab()
+        {
+            InterTabDiploma tabDiploma = new InterTabDiploma(DataContext.Diploms);
+            tabDiploma.name = tabDiploma.Diploms.Count.ToString();
+
+            interTabs.Add(tabDiploma);
         }
 
         private void OnAddTab(Group obj)
