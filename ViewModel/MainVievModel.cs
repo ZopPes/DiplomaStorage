@@ -40,12 +40,6 @@ namespace DiplomaStorage
                         item.CloseRequested += OnCloseTab;
                     }
                     break;
-
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                    break;
-
-                default:
-                    break;
             }
         }
 
@@ -60,8 +54,8 @@ namespace DiplomaStorage
         {
             if (!Directory.Exists(@"data\" + obj.id)) Directory.CreateDirectory(@"data\" + obj.id);
             if (obj.annotation != null) File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.annotation) + "." + obj.annot_type, obj.annotation.ToArray());
-            if (obj.documentation != null) File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.documentation) + "." + obj.doc_type, obj.documentation.ToArray());
             if (obj.statement != null) File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.statement) + "." + obj.state_type, obj.statement.ToArray());
+            File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.documentation) + "." + obj.doc_type, obj.documentation.ToArray());
             File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.data) + ".rar", obj.statement.ToArray());
             Process.Start(@"data\" + obj.id);
         }
@@ -96,7 +90,6 @@ namespace DiplomaStorage
             {
                 AddDiplomaVisibleControl.New.statement = File.ReadAllBytes(fileDialog.FileName);
                 AddDiplomaVisibleControl.New.StatementP = fileDialog.FileName;
-                OnPropertyChanged(nameof(AddDiplomaVisibleControl.New.StatementP));
                 AddDiplomaVisibleControl.New.state_type = fileDialog.FileName.Substring(fileDialog.FileName.LastIndexOf('.') + 1);
             }
         }
@@ -127,7 +120,6 @@ namespace DiplomaStorage
             {
                 AddDiplomaVisibleControl.New.documentation = File.ReadAllBytes(fileDialog.FileName);
                 AddDiplomaVisibleControl.New.DocP = fileDialog.FileName;
-                OnPropertyChanged(nameof(AddDiplomaVisibleControl.New.DocP));
                 AddDiplomaVisibleControl.New.doc_type = fileDialog.FileName.Substring(fileDialog.FileName.LastIndexOf('.') + 1);
             }
         }
@@ -148,7 +140,6 @@ namespace DiplomaStorage
                 AddDiplomaVisibleControl.New.data = File.ReadAllBytes(fileDialog.FileName);
 
                 AddDiplomaVisibleControl.New.DataP = fileDialog.FileName;
-                OnPropertyChanged(nameof(AddDiplomaVisibleControl.New.DataP));
                 AddDiplomaVisibleControl.New.doc_type = fileDialog.FileName.Substring(fileDialog.FileName.LastIndexOf('.') + 1);
             }
         }
@@ -171,8 +162,6 @@ namespace DiplomaStorage
             {
                 AddDiplomaVisibleControl.New.annotation = File.ReadAllBytes(fileDialog.FileName);
                 AddDiplomaVisibleControl.New.AnnotationP = fileDialog.FileName;
-                OnPropertyChanged(nameof(AddDiplomaVisibleControl.New.AnnotationP));
-
                 AddDiplomaVisibleControl.New.annot_type = fileDialog.FileName.Substring(fileDialog.FileName.LastIndexOf('.') + 1);
             }
         }
@@ -216,16 +205,6 @@ namespace DiplomaStorage
             ViewDiploms = new ObservableCollection<Diploms>(DataContext.Diploms);
         }
 
-        private void OnHideGroup()
-        {
-            DataContext.hide_Group
-                (
-                SelectedGroup.id
-                );
-
-            DataContext.Refresh(RefreshMode.OverwriteCurrentValues, DataContext.Group);
-            OnPropertyChanged(nameof(Groups));
-        }
 
         private void OnAddStudent()
         {

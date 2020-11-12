@@ -95,7 +95,8 @@
                                         <DataTemplate>
                                             <Button Content="{Binding Fnumber}"
                                                     Command="{Binding DataContext.AddTab, ElementName=grid, Mode=OneWay}"
-                                                    CommandParameter="{Binding}" />
+                                                    CommandParameter="{Binding}" 
+                                                    Background="Transparent"/>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>

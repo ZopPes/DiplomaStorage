@@ -93,14 +93,6 @@ namespace DiplomaStorage
 
         public OpenFileDialog fileDialog;
 
-        #region SelectedGroup
-
-        private Group sGroup;
-
-        /// <summary>Выбранная группа</summary>
-        public Group SelectedGroup { get => sGroup; set => Set(ref sGroup, value); }
-
-        #endregion SelectedGroup
 
         #endregion Prop
 
@@ -109,8 +101,6 @@ namespace DiplomaStorage
         public lamdaCommand AddGroup { get; private set; }
         public lamdaCommand AddStudent { get; private set; }
         public lamdaCommand AddTeacher { get; private set; }
-
-        public lamdaCommand HideGroup { get; private set; }
 
         public lamdaCommand AddDiploma { get; private set; }
         public lamdaCommand AddDiplomaData { get; private set; }
@@ -149,19 +139,16 @@ namespace DiplomaStorage
             Students = new ObservableCollection<Student>(DataContext.Student);
             Teacher = new ObservableCollection<Teacher>(DataContext.Teacher);
 
-            AddStudent = new lamdaCommand(OnAddStudent);
-
-            AddTeacher = new lamdaCommand(OnAddTeacher);
-
             AddGroup = new lamdaCommand(OnAddGroup);
-
+            AddStudent = new lamdaCommand(OnAddStudent);
+            AddTeacher = new lamdaCommand(OnAddTeacher);
             AddDiploma = new lamdaCommand(OnAddDiploma);
-            AddDiplomaAnnotation = new lamdaCommand(OnAddDiplomaAnnotation);
+
             AddDiplomaData = new lamdaCommand(OnAddDiplomaData);
             AddDiplomaDocumentation = new lamdaCommand(OnAddDiplomaDocumentation);
             AddDiplomaStatement = new lamdaCommand(OnAddDiplomaStatement);
+            AddDiplomaAnnotation = new lamdaCommand(OnAddDiplomaAnnotation);
 
-            HideGroup = new lamdaCommand(OnHideGroup);
 
             DiplomaTabs = new ObservableCollection<Tab>();
             DiplomaTabs.CollectionChanged += Tabs_CollectionChanged;
