@@ -17,31 +17,66 @@
         <CollectionViewSource x:Key="cvsTabs" Source="{Binding Path=DiplomaTabs}" />
     </Window.Resources>
     <Grid x:Name="grid">
-        <Grid IsEnabled="{Binding EnableMain}">
-            <Grid.Effect>
-                <BlurEffect Radius="{Binding BlurEffect}" />
-            </Grid.Effect>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=addGroupControl}" Value="Visible">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="8" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=addDiplomaControl}" Value="Visible">
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="8" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=addStudentControl}" Value="Visible">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="8" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Visibility, ElementName=addTeacherControl}" Value="Visible">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="8" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
             <Menu>
-                <MenuItem
+                <MenuItem x:Name="menuItem"
                     Header="добавить группу"
-                        Command="{Binding VisibleGroup}">
+                          Command="{Binding AddGroupVisibleControl.Visible}">
                 </MenuItem>
                 <MenuItem
                     Header="добавить студента"
-                    Command="{ Binding VisibleStudent}"
+                    Command="{ Binding AddStudentVisibleControl.Visible}"
                     CommandParameter="" />
                 <MenuItem
                     Header="добавить преподователя"
-                    Command="{ Binding VisibleTeacher}"
+                    Command="{ Binding AddTeacherVisibleControl.Visible}"
                     CommandParameter="" />
                 <MenuItem
                    Header="добавить диплом"
-                   Command="{Binding VisibleDiploma}" />
+                   Command="{Binding AddDiplomaVisibleControl.Visible}" />
             </Menu>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -68,7 +103,7 @@
                         </DataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
-                <TabControl Grid.Column="1" Grid.ColumnSpan="2" >
+                <TabControl Grid.Column="1" Grid.ColumnSpan="2">
                     <TabControl.ItemsSource>
                         <CompositeCollection>
                             <TabItem Header="Все дипломы">
@@ -132,9 +167,17 @@
             </Grid>
         </Grid>
 
-        <MUC:AddGroupControl  Visibility="{Binding AddGroupVisible}" Width="450" Height="275"/>
-        <MUC:AddDiplomaControl Visibility="{Binding AddDiplomaVisible}" Width="650" Height="275"/>
-        <MUC:AddStudentControl Visibility="{Binding AddStudentVisible}" Width="300" Height="250"/>
-        <MUC:AddTeacherControl Visibility="{Binding AddTeacherVisible}"  Width="300" Height="250"/>
+        <MUC:AddGroupControl x:Name="addGroupControl"
+        Visibility="{Binding AddGroupVisibleControl.VisibletiControl}"
+                             Width="450" Height="275" />
+        <MUC:AddDiplomaControl x:Name="addDiplomaControl"
+                Visibility="{Binding AddDiplomaVisibleControl.VisibletiControl}"
+        Width="650" Height="275" />
+        <MUC:AddStudentControl x:Name="addStudentControl"
+        Visibility="{Binding AddStudentVisibleControl.VisibletiControl}"
+        Width="300" Height="250" />
+        <MUC:AddTeacherControl x:Name="addTeacherControl"
+        Visibility="{Binding AddTeacherVisibleControl.VisibletiControl}"
+        Width="300" Height="250" />
     </Grid>
 </Window>

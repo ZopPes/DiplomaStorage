@@ -1,7 +1,6 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
-using System.IO;
-
 
 namespace DiplomaStorage.UserControls
 {

@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="DiplomaStorage.UserControls.AddStudentControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DiplomaStorage.UserControls"
-             mc:Ignorable="d" >
-    <Grid  Background="#FFE4D6D6" >
+             mc:Ignorable="d">
+    <Grid  Background="#FFE4D6D6">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -21,19 +21,19 @@
         </Grid.RowDefinitions>
 
         <Button Content="X" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Command="{Binding CloseAddStudent}" />
+                    Command="{Binding AddStudentVisibleControl.Collapsed}" />
         <Label Grid.Row="1" Content="фамилия*" />
         <TextBox Grid.Column="1" Grid.Row="1"
-                                  Text="{Binding NewStudent.Pioples.lastname, UpdateSourceTrigger=PropertyChanged}" />
+                                  Text="{Binding AddStudentVisibleControl.New.Pioples.lastname, UpdateSourceTrigger=PropertyChanged}" />
         <Label Content="имя*"  Grid.Row="2" />
 
-        <TextBox Grid.Row="2" Text="{Binding NewStudent.Pioples.name,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" />
+        <TextBox Grid.Row="2" Text="{Binding AddStudentVisibleControl.New.Pioples.name,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" />
         <Label Content="отчество*" Grid.Row="3" />
-        <TextBox  Grid.Row="3" Text="{ Binding NewStudent.Pioples.patronymic,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2" />
+        <TextBox  Grid.Row="3" Text="{ Binding AddStudentVisibleControl.New.Pioples.patronymic,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2" />
         <Label Content="выберите группу*" Grid.Row="4" />
         <ComboBox  Grid.Row="4" Grid.Column="2"
                        ItemsSource="{Binding DataContext.Group}"
-                       SelectedItem="{Binding NewStudent.Group}"
+                       SelectedItem="{Binding AddStudentVisibleControl.New.Group}"
                        DisplayMemberPath="Fnumber" />
         <Button Margin="0,10,0,0"
                                 Content="добавить"

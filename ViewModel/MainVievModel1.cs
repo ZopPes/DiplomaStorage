@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using DiplomaStorage.UserControls;
 using Microsoft.Win32;
 using Model;
@@ -42,41 +41,10 @@ namespace DiplomaStorage
 
         #endregion Students
 
-        #region BlurEffect
-
-        private int blurEffect;
-
-        /// <summary>Размытие фона</summary>
-        public int BlurEffect { get => blurEffect; set => Set(ref blurEffect, value); }
-
-        #endregion BlurEffect
-
-        #region AuthorizVisible
-
-        private Visibility visibility;
-
-        /// <summary>Отображение формы авторизации</summary>
-        public Visibility AuthorizVisible { get => visibility; set => Set(ref visibility, value); }
-
-        #endregion AuthorizVisible
-
-        #region NewDiploma
-
-        private Diploms newDiploma;
-
-        /// <summary>переменная для хранения данных о новом дипломе</summary>
-        public Diploms NewDiploma { get => newDiploma; set => Set(ref newDiploma, value); }
-
-        #endregion NewDiploma
-
-        #region NewTeacher
-
-        private Teacher newTeacher;
-
-        /// <summary>переменная для хранения данных о новом дипломе</summary>
-        public Teacher NewTeacher { get => newTeacher; set => Set(ref newTeacher, value); }
-
-        #endregion NewTeacher
+        public IEnumerable Groups
+        {
+            get => DataContext.Group.GroupBy(i => i.date, (i, g) => new { k = i, G = g });
+        }
 
         #region VievDiploma
 
@@ -87,79 +55,43 @@ namespace DiplomaStorage
 
         #endregion VievDiploma
 
-        #region AddDiplomaVisible
+        #region AddDiplomaVisibleControl
 
-        private Visibility Addvisibility;
+        private TableControl<Diploms> DilomaControl;
 
-        /// <summary>Отображение окна добавления диплома</summary>
-        public Visibility AddDiplomaVisible { get => Addvisibility; set => Set(ref Addvisibility, value); }
+        /// <summary>Обработка окна диплома</summary>
+        public TableControl<Diploms> AddDiplomaVisibleControl { get => DilomaControl; set => Set(ref DilomaControl, value); }
 
-        #endregion AddDiplomaVisible
+        #endregion AddDiplomaVisibleControl
 
-        #region AddTeacherVisible
+        #region AddTeacherVisibleControl
 
-        private Visibility AddvisibilityTeacher;
+        private TableControl<Teacher> addTeacherVisibleControl;
 
-        /// <summary>Отображение окна добавления диплома</summary>
-        public Visibility AddTeacherVisible { get => AddvisibilityTeacher; set => Set(ref AddvisibilityTeacher, value); }
+        /// <summary>Обработка онка преподователя</summary>
+        public TableControl<Teacher> AddTeacherVisibleControl { get => addTeacherVisibleControl; set => Set(ref addTeacherVisibleControl, value); }
 
-        #endregion AddTeacherVisible
+        #endregion AddTeacherVisibleControl
 
-        #region EnableMain
+        #region AddStudentVisibleControl
 
-        private bool enablemain;
+        private TableControl<Student> addStudentVisibleControl;
 
-        /// <summary>включение и выключение главной фого окна</summary>
-        public bool EnableMain { get => enablemain; set => Set(ref enablemain, value); }
+        /// <summary>обработка окна студента</summary>
+        public TableControl<Student> AddStudentVisibleControl { get => addStudentVisibleControl; set => Set(ref addStudentVisibleControl, value); }
 
-        #endregion EnableMain
+        #endregion AddStudentVisibleControl
 
-        #region AddStudentVisible
+        #region AddGroupVisibleControl
 
-        private Visibility AddvisibilityStudent;
+        private TableControl<Group> addGroupVisibleControl;
 
-        /// <summary>Отображение окна добавления диплома</summary>
-        public Visibility AddStudentVisible { get => AddvisibilityStudent; set => Set(ref AddvisibilityStudent, value); }
+        /// <summary>обработчик окна групп</summary>
+        public TableControl<Group> AddGroupVisibleControl { get => addGroupVisibleControl; set => Set(ref addGroupVisibleControl, value); }
 
-        #endregion AddStudentVisible
-
-        #region AddGroupVisible
-
-        private Visibility AddvisibilityGroup;
-
-        /// <summary>Отображение окна добавления диплома</summary>
-        public Visibility AddGroupVisible { get => AddvisibilityGroup; set => Set(ref AddvisibilityGroup, value); }
-
-        #endregion AddGroupVisible
-
-        public IEnumerable Groups
-        {
-            get => DataContext.Group.GroupBy(i => i.date, (i, g) => new { k = i, G = g });
-        }
+        #endregion AddGroupVisibleControl
 
         public OpenFileDialog fileDialog;
-
-        #region NewStudent
-
-        private Student newStudent;
-
-        /// <summary>Шаблон для новой группы</summary>
-        public Student NewStudent
-        {
-            get => newStudent;
-            set => Set(ref newStudent, value);
-        }
-
-        #endregion NewStudent
-
-        #region NewGroup
-
-        private Group newGroup;
-
-        /// <summary>Шаблон для новой группы</summary>
-        public Group NewGroup { get => newGroup; set => Set(ref newGroup, value); }
-
-        #endregion NewGroup
 
         #region SelectedGroup
 
@@ -180,21 +112,11 @@ namespace DiplomaStorage
 
         public lamdaCommand HideGroup { get; private set; }
 
-        public lamdaCommand VisibleDiploma { get; private set; }
-        public lamdaCommand VisibleGroup { get; private set; }
-        public lamdaCommand VisibleStudent { get; private set; }
-        public lamdaCommand VisibleTeacher { get; private set; }
-
         public lamdaCommand AddDiploma { get; private set; }
         public lamdaCommand AddDiplomaData { get; private set; }
         public lamdaCommand AddDiplomaDocumentation { get; private set; }
         public lamdaCommand AddDiplomaStatement { get; private set; }
         public lamdaCommand AddDiplomaAnnotation { get; private set; }
-
-        public lamdaCommand CloseAddDiploma { get; private set; }
-        public lamdaCommand CloseAddStudent { get; private set; }
-        public lamdaCommand CloseAddTeacher { get; private set; }
-        public lamdaCommand CloseAddGroup { get; private set; }
 
         public lamdaCommand<Group> AddTab { get; private set; }
 
@@ -204,18 +126,19 @@ namespace DiplomaStorage
 
         private void InitializeComponent()
         {
-            AddDiplomaVisible = Visibility.Collapsed;
-            AddGroupVisible = Visibility.Collapsed;
-            AddStudentVisible = Visibility.Collapsed;
-            AddTeacherVisible = Visibility.Collapsed;
-
-            BlurEffect = 0;
-            EnableMain = true;
+            AddDiplomaVisibleControl = new TableControl<Diploms>();
+            AddGroupVisibleControl = new TableControl<Group>();
+            AddStudentVisibleControl = new TableControl<Student>
+                (
+                new Student() { Pioples = new Pioples() }
+                );
+            AddTeacherVisibleControl = new TableControl<Teacher>
+                (
+                new Teacher() { Pioples = new Pioples() }
+                );
 
             fileDialog = new OpenFileDialog();
 
-            NewDiploma = new Diploms();
-            newGroup = new Group();
             //Authorization authorization = new Authorization();
             //authorization.ShowDialog();
             //DataContext = new DiplomaStorageDataContext(authorization.sql);
@@ -238,24 +161,7 @@ namespace DiplomaStorage
             AddDiplomaDocumentation = new lamdaCommand(OnAddDiplomaDocumentation);
             AddDiplomaStatement = new lamdaCommand(OnAddDiplomaStatement);
 
-            NewStudent = new Student() { Pioples = new Pioples() };
-
-            NewTeacher = new Teacher() { Pioples = new Pioples() };
-
-            NewGroup = new Group();
             HideGroup = new lamdaCommand(OnHideGroup);
-
-            VisibleGroup = new lamdaCommand(OnVisibleGroup);
-            CloseAddGroup = new lamdaCommand(OnCloseAddGroup);
-
-            VisibleDiploma = new lamdaCommand(OnVisibleDiploma);
-            CloseAddDiploma = new lamdaCommand(OnCloseAddDiploma);
-
-            VisibleStudent = new lamdaCommand(OnVisibleStudent);
-            CloseAddStudent = new lamdaCommand(OnCloseAddStudent);
-
-            VisibleTeacher = new lamdaCommand(OnVisibleTeacher);
-            CloseAddTeacher = new lamdaCommand(OnCloseAddTeacher);
 
             DiplomaTabs = new ObservableCollection<Tab>();
             DiplomaTabs.CollectionChanged += Tabs_CollectionChanged;

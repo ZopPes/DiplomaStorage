@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace DiplomaStorage
 {
@@ -13,7 +11,5 @@ namespace DiplomaStorage
         {
             InitializeComponent();
         }
-
-        
     }
 }

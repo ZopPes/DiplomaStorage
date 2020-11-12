@@ -1,12 +1,11 @@
 ﻿<UserControl x:Class="DiplomaStorage.UserControls.AddGroupControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DiplomaStorage.UserControls"
-             mc:Ignorable="d" 
-            >
-    <Grid Background="#FFE4D6D6" >
+             mc:Ignorable="d">
+    <Grid Background="#FFE4D6D6">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -20,18 +19,18 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Button Content="X" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Command="{Binding CloseAddGroup}" />
+                    Command="{Binding AddGroupVisibleControl.Collapsed}" />
         <Label Content="номер группы (3 символа)*" Grid.Row="1" />
         <TextBox Grid.Column="1"
                                  Grid.Row="1"
-                     Text="{Binding NewGroup.number}" />
+                     Text="{Binding AddGroupVisibleControl.New.number}" />
 
         <Label Content="выберите дату*" Grid.Row="2" />
-        <DatePicker  SelectedDate="{Binding NewGroup.FDate}" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
+        <DatePicker  SelectedDate="{Binding AddGroupVisibleControl.New.FDate}" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
 
         <Label Content="название группы"
                    Grid.Row="3" />
-        <TextBox Grid.Row="3"  Grid.Column="1" Text="{Binding NewGroup.name}" />
+        <TextBox Grid.Row="3"  Grid.Column="1" Text="{Binding AddGroupVisibleControl.New.name}" />
 
         <Button Margin="0,8,0,0"
                                 Content="добавить"

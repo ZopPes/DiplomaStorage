@@ -1,11 +1,10 @@
 ﻿<UserControl x:Class="DiplomaStorage.UserControls.AddDiplomaControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:DiplomaStorage.UserControls"
-             mc:Ignorable="d" 
-             >
+             mc:Ignorable="d">
     <Grid  Background="#FFE4D6D6">
 
         <Grid.ColumnDefinitions>
@@ -25,22 +24,22 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Button Content="X" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Command="{Binding CloseAddDiploma}" />
+                    Command="{Binding AddDiplomaVisibleControl.Collapsed}" />
         <Label Content="выберите студента*" Grid.Row="1" />
         <ComboBox Grid.Column="1"
                                  Grid.Row="1"
                       ItemsSource="{Binding Students}"
                       SelectedValuePath="id"
-                      SelectedValue="{Binding NewDiploma.Sudent_id}" />
+                      SelectedValue="{Binding AddDiplomaVisibleControl.New.Sudent_id}" />
 
         <Label Content="выберите проверяющего*"  Grid.Row="2" />
         <ComboBox Grid.Row="2"  Grid.Column="1"
                       ItemsSource="{Binding Teacher}"
                       SelectedValuePath="id"
-                      SelectedValue="{Binding NewDiploma.Teacher_id}" />
+                      SelectedValue="{Binding AddDiplomaVisibleControl.New.Teacher_id}" />
 
         <Label Content="выберите дату*" Grid.Row="3" />
-        <DatePicker  SelectedDate="{Binding NewDiploma.date}" Grid.Row="3" Grid.Column="2" />
+        <DatePicker  SelectedDate="{Binding AddDiplomaVisibleControl.New.date}" Grid.Row="3" Grid.Column="2" />
 
         <Label Content="выберите архив с данными к диплому*"
                    Grid.Row="4" />
@@ -101,7 +100,7 @@
 
         <Label Content="ваш комментарий к диплому"
                    Grid.Row="8" />
-        <TextBox Grid.Row="8"  Grid.Column="1" Text="{Binding NewDiploma.comment}" />
+        <TextBox Grid.Row="8"  Grid.Column="1" Text="{Binding AddDiplomaVisibleControl.New.comment}" />
 
         <Button Margin="0,8,0,0"
                                 Content="добавить"
