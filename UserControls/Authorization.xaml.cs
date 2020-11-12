@@ -29,6 +29,7 @@ namespace DiplomaStorage.UserControls
             {
                 sql.Open();
                 falseopen.Visibility = Visibility.Visible;
+                DialogResult = true;
                 Close();
             }
             catch (Exception ex)

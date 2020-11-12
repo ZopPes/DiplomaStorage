@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace DiplomaStorage
 {
@@ -9,6 +10,7 @@ namespace DiplomaStorage
     {
         public MainWindow()
         {
+
             InitializeComponent();
         }
     }

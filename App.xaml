@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:DiplomaStorage"
              xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="DiplomaStorage.App"
              StartupUri="MainWindow.xaml"
+    ShutdownMode="OnMainWindowClose"
     xmlns:emoji="http://schemas.microsoft.com/netfx/2009/xaml/presentation">
     <Application.Resources>
         <Style x:Key="WinButton" TargetType="{x:Type Button}">

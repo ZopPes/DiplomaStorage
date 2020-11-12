@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using DiplomaStorage.UserControls;
 using Microsoft.Win32;
 using Model;
@@ -11,6 +13,8 @@ namespace DiplomaStorage
     partial class MainVievModel
     {
         #region Prop
+
+        public bool IsConnect=false;
 
         public DiplomaStorageDataContext DataContext { get; set; }
 
@@ -116,6 +120,18 @@ namespace DiplomaStorage
 
         private void InitializeComponent()
         {
+            Authorization authorization = new Authorization();
+            if (authorization.ShowDialog() == true)
+            {
+                IsConnect = true;
+                DataContext = new DiplomaStorageDataContext(authorization.sql);
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            return;
+            }
+
             AddDiplomaVisibleControl = new TableControl<Diploms>();
             AddGroupVisibleControl = new TableControl<Group>();
             AddStudentVisibleControl = new TableControl<Student>
@@ -129,11 +145,6 @@ namespace DiplomaStorage
 
             fileDialog = new OpenFileDialog();
 
-            //Authorization authorization = new Authorization();
-            //authorization.ShowDialog();
-            //DataContext = new DiplomaStorageDataContext(authorization.sql);
-            DataContext = new DiplomaStorageDataContext();
-            //TODO: раскрыть вход
             ViewDiploms = new ObservableCollection<Diploms>(DataContext.Diploms);
 
             Students = new ObservableCollection<Student>(DataContext.Student);
