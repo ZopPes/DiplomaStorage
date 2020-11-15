@@ -10,8 +10,9 @@ namespace DiplomaStorage
     {
         public MainWindow()
         {
-
+            
             InitializeComponent();
+            var r = this.Resources;
         }
     }
 }

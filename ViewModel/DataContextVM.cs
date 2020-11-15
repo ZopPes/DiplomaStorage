@@ -9,7 +9,7 @@ using Model;
 
 namespace DiplomaStorage
 {
-    class DataContextVM : DiplomaStorageDataContext, INotifyPropertyChanged
+    public class DataContextVM : DiplomaStorageDataContext, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
@@ -23,6 +23,11 @@ namespace DiplomaStorage
             field = value;
             OnPropertyChanged();
             return true;
+        }
+
+        public DataContextVM() 
+        { 
+            
         }
     }
 }
