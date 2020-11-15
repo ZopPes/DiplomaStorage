@@ -195,14 +195,14 @@ namespace DiplomaStorage
                         ,
                         comment: AddDiplomaVisibleControl.New.comment
                         );
+                DataContext.Refresh(RefreshMode.OverwriteCurrentValues, DataContext.Diploms);
+                 ViewDiploms = new ObservableCollection<Diploms>(DataContext.Diploms);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                DataContext.Refresh(RefreshMode.OverwriteCurrentValues, DataContext.Diploms);
             });
-            ViewDiploms = new ObservableCollection<Diploms>(DataContext.Diploms);
         }
 
 

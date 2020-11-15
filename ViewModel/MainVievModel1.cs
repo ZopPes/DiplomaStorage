@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -47,7 +48,7 @@ namespace DiplomaStorage
 
         public IEnumerable Groups
         {
-            get => DataContext.Group.GroupBy(i => i.date, (i, g) => new { k = i, G = g });
+            get => DataContext?.Group.GroupBy(i => i.date, (i, g) => new { k = i, G = g }) ?? null;
         }
 
         #region VievDiploma

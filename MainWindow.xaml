@@ -9,7 +9,8 @@
         xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
         xmlns:Data="clr-namespace:Model;assembly=Model"
         xmlns:emoji="clr-namespace:Emoji.Wpf;assembly=Emoji.Wpf"
-        Height="450" Width="800">
+        Height="450" Width="800"
+        Title="Хранилище Дипломов">
     <Window.DataContext>
         <local:MainVievModel/>
     </Window.DataContext>

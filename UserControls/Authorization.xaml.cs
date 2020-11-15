@@ -35,6 +35,7 @@ namespace DiplomaStorage.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                falseopen.Visibility = Visibility.Visible;
             }
         }
     }
