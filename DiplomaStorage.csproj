@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="UserControls\Tab.cs" />
     <Compile Include="UserControls\TabDiploma.cs" />
+    <Compile Include="ViewModel\DataContextVM.cs" />
     <Compile Include="ViewModel\MainVievModel.cs" />
     <Compile Include="ViewModel\MainVievModel1.cs" />
     <Compile Include="ViewModel\TableControl.cs" />
