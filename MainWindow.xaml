@@ -22,7 +22,7 @@
         </CollectionViewSource>
     </Window.Resources>
     <Window.DataContext>
-        <Data:DiplomaStorageDataContext/>
+        <local:DataContextVM/>
     </Window.DataContext>
     <Grid x:Name="grid">
         <Grid>
@@ -72,12 +72,13 @@
             <Menu>
                 <MenuItem x:Name="menuItem"
                     Header="добавить группу"
-                          Command="{Binding AddGroupVisibleControl.Visible}"/>
+                          Command="{Binding GroupControl.Visible}">
+                </MenuItem>
                 <MenuItem
                     Header="добавить студента"
-                    Command="{Binding AddStudentVisibleControl.Visible}"
-                    CommandParameter="" />
-                <MenuItem
+                    Command="{Binding VisibleControl}"
+                    />
+                <MenuItem 
                     Header="добавить преподователя"
                     Command="{Binding AddTeacherVisibleControl.Visible}"
                     CommandParameter="" />
@@ -99,7 +100,10 @@
                             <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Items}">
                                 <TreeViewItem.ItemTemplate>
                                     <DataTemplate DataType="{x:Type Data:Group}">
-                                        <TreeViewItem Header="{Binding Fnumber}"/>
+                                        <Button Content="{Binding Fnumber}" 
+                                                Command="{Binding DataContext.AddTab, ElementName=treeView}"
+                                                CommandParameter="{Binding }"
+                                                />
                                     </DataTemplate>
                                 </TreeViewItem.ItemTemplate>
                             </TreeViewItem>
@@ -109,13 +113,13 @@
                 <TabControl Grid.Column="1" Grid.ColumnSpan="2">
                     <TabControl.Resources>
                         <DataTemplate DataType="{x:Type MUC:TabDiploma}">
-                            <MUC:MagicTabControl DataContext="{Binding ''}" />
+                            <MUC:MagicTabControl DataContext="{Binding }" />
                         </DataTemplate>
                     </TabControl.Resources>
                     <TabControl.ItemsSource>
                         <CompositeCollection>
                             <TabItem Header="Все дипломы">
-                                <ListBox ItemsSource="{Binding ViewDiploms}">
+                                <ListBox ItemsSource="{Binding Diploms}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -137,6 +141,7 @@
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center" />
 
+                                                   
                                                     <Button Grid.Row="2" Content="открыть"
                                                 Command="{Binding DataContext.OpenDiploma, ElementName=grid}"
                                                 CommandParameter="{Binding}" />
@@ -166,10 +171,20 @@
             </Grid>
         </Grid>
 
-        <!--<MUC:AddGroupControl x:Name="addGroupControl"
-        Visibility="{Binding AddGroupVisibleControl.VisibletiControl}"
-                             Width="450" Height="275" />
-        <MUC:AddDiplomaControl x:Name="addDiplomaControl"
+        <MUC:AddGroupControl x:Name="addGroupControl"
+                             Width="450" Height="275"
+                             Visibility="{Binding GroupControl.VisibletiControl}" >
+            <MUC:AddGroupControl.Style>
+                <Style TargetType="MUC:AddGroupControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPressed, ElementName=menuItem, Mode=OneWay}">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </MUC:AddGroupControl.Style>
+        </MUC:AddGroupControl>
+        <!--<MUC:AddDiplomaControl x:Name="addDiplomaControl"
                 Visibility="{Binding AddDiplomaVisibleControl.VisibletiControl}"
         Width="650" Height="275" />
         <MUC:AddStudentControl x:Name="addStudentControl"

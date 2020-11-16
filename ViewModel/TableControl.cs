@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using WPFMVVMHelper;
 
 namespace DiplomaStorage
@@ -41,5 +42,33 @@ namespace DiplomaStorage
             Collapsed = new lamdaCommand(() => VisibletiControl = Visibility.Collapsed);
             New = @new;
         }
+    }
+
+    public class TableControlTest<T> : peremlog where T : new()
+    {
+
+        #region VisibletiControl
+
+        private Visibility visibility;
+
+        /// <summary>Отображение окна</summary>
+        public Visibility VisibletiControl { get => visibility; set => Set(ref visibility, value); }
+
+        #endregion VisibletiControl
+
+        public lamdaCommand Visible { get; private set; }
+        public lamdaCommand Collapsed { get; private set; }
+
+        public lamdaCommand<T> AddNew { get; private set; }
+
+        public TableControlTest(Action<T> action)
+        {
+            VisibletiControl = Visibility.Collapsed;
+            Visible = new lamdaCommand(() => VisibletiControl = Visibility.Visible);
+            Collapsed = new lamdaCommand(() => VisibletiControl = Visibility.Collapsed);
+            AddNew = new lamdaCommand<T>(action);
+        }
+
+       
     }
 }
