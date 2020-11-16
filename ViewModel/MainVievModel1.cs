@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Linq;
 using System.Linq;
 using System.Windows;
 using DiplomaStorage.UserControls;
@@ -15,7 +16,12 @@ namespace DiplomaStorage
     {
         #region Prop
 
-        public bool IsConnect=false;
+
+        #region IsOpenDiplomaLOading
+        private bool isOpenDiplomaLOading;
+        /// <summary>MyComment</summary>
+        public bool IsOpenDiplomaLOading { get => isOpenDiplomaLOading; set => isOpenDiplomaLOading = value; }
+        #endregion
 
         public DiplomaStorageDataContext DataContext { get; set; }
 
@@ -46,10 +52,18 @@ namespace DiplomaStorage
 
         #endregion Students
 
-        public IEnumerable Groups
-        {
-            get => DataContext?.Group.GroupBy(i => i.date, (i, g) => new { k = i, G = g }) ?? null;
+        #region Groups
+
+        private ObservableCollection<Group> groups;
+
+        /// <summary>Список студентов</summary>
+        public ObservableCollection<Group> Groups 
+        { 
+            get => groups; 
+            set => Set(ref groups, value); 
         }
+
+        #endregion Students
 
         #region VievDiploma
 
@@ -121,17 +135,19 @@ namespace DiplomaStorage
 
         private void InitializeComponent()
         {
-            Authorization authorization = new Authorization();
-            if (authorization.ShowDialog() == true)
-            {
-                IsConnect = true;
-                DataContext = new DiplomaStorageDataContext(authorization.sql);
-            }
-            else
-            {
-                Application.Current.Shutdown();
-            return;
-            }
+            //Authorization authorization = new Authorization();
+            //if (authorization.ShowDialog() == true)
+            //{
+            //    IsConnect = true;
+            //    DataContext = new DiplomaStorageDataContext(authorization.sql);
+            //}
+            //else
+            //{
+            //    Application.Current.Shutdown();
+            //return;
+            //}
+
+            DataContext = new DiplomaStorageDataContext();
 
             AddDiplomaVisibleControl = new TableControl<Diploms>();
             AddGroupVisibleControl = new TableControl<Group>();
@@ -150,6 +166,7 @@ namespace DiplomaStorage
 
             Students = new ObservableCollection<Student>(DataContext.Student);
             Teacher = new ObservableCollection<Teacher>(DataContext.Teacher);
+            Groups = new ObservableCollection<Group>(DataContext.Group);
 
             AddGroup = new lamdaCommand(OnAddGroup);
             AddStudent = new lamdaCommand(OnAddStudent);

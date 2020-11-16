@@ -16,6 +16,11 @@
     </Window.DataContext>
     <Window.Resources>
         <CollectionViewSource x:Key="cvsTabs" Source="{Binding Path=DiplomaTabs}" />
+        <CollectionViewSource x:Key="GrouptreeView" Source="{Binding Groups}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="date"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
     </Window.Resources>
     <Grid x:Name="grid">
         <Grid>
@@ -86,21 +91,17 @@
                     <ColumnDefinition Width="462*" />
                 </Grid.ColumnDefinitions>
 
-                <TreeView x:Name="treeView" ItemsSource="{Binding Groups}">
+                <TreeView x:Name="treeView" ItemsSource="{Binding Mode=OneWay, Source={StaticResource GrouptreeView}, Path=Groups}">
                     <TreeView.ItemTemplate>
                         <DataTemplate>
-                            <TreeViewItem Header="{Binding k, Mode=OneWay}">
-                                <ListBox
-                                ItemsSource="{Binding G}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button Content="{Binding Fnumber}"
-                                                    Command="{Binding DataContext.AddTab, ElementName=grid, Mode=OneWay}"
-                                                    CommandParameter="{Binding}" 
-                                                    Background="Transparent"/>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                            <TreeViewItem Header="{Binding Name}" ItemsSource="{Binding Items}">
+                                <TreeViewItem.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding Fnumber}"
+                                                Command="{Binding DataContext.AddTab, ElementName=treeView, Mode=OneWay}"
+                                                CommandParameter="{Binding}"/>
+                                    </DataTemplate>
+                                </TreeViewItem.ItemTemplate>
                             </TreeViewItem>
                         </DataTemplate>
                     </TreeView.ItemTemplate>
