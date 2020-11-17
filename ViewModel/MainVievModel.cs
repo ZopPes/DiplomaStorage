@@ -19,6 +19,7 @@ namespace DiplomaStorage
         public MainVievModel()
         {
             InitializeComponent();
+            
         }
 
         private void OnAddTab(Group obj)
@@ -51,24 +52,29 @@ namespace DiplomaStorage
             DiplomaTabs.Remove(tab);
         }
 
+        /// <summary>
+        /// открытие выбранного диплома
+        /// загружает данные о файлах диплома в папку "data"
+        /// </summary>
+        /// <param name="obj">Диплом Который необходимо загрусить из баззы и открыть</param>
         private void OnOpenDiploma(Diploms obj)
         {
-            if (!Directory.Exists(@"data\" + obj.id)) Directory.CreateDirectory(@"data\" + obj.id);
-            if (obj.annotation != null)
-            {
-                var annotation = DataContext.Get_File(obj.annotation).First();
-                File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.annotation) + "." + annotation.type, annotation.data.ToArray());
-            }
-            if (obj.statement != null)
-            {
-                var statement = DataContext.Get_File(obj.statement).First();
-                File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.statement) + "." + statement.type, statement.data.ToArray());
-            }
-            var documentation = DataContext.Get_File(obj.documentation).First();
-            File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.documentation) + "." + documentation.type, documentation.data.ToArray());
-            var data = DataContext.Get_File(obj.data).First();
-            File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.data) + "."+data.type, data.data.ToArray());
-            Process.Start(@"data\" + obj.id);
+                if (!Directory.Exists(@"data\" + obj.id)) Directory.CreateDirectory(@"data\" + obj.id);
+                if (obj.annotation != null)
+                {
+                    var annotation = DataContext.Get_File(obj.annotation).First();
+                    File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.annotation) + "." + annotation.type, annotation.data.ToArray());
+                }
+                if (obj.statement != null)
+                {
+                    var statement = DataContext.Get_File(obj.statement).First();
+                    File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.statement) + "." + statement.type, statement.data.ToArray());
+                }
+                var documentation = DataContext.Get_File(obj.documentation).First();
+                File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.documentation) + "." + documentation.type, documentation.data.ToArray());
+                var data = DataContext.Get_File(obj.data).First();
+                File.WriteAllBytes(@"data\" + obj.id + "\\" + nameof(obj.data) + "." + data.type, data.data.ToArray());
+                Process.Start(@"data\" + obj.id);
         }
 
         private void OnAddTeacher()
@@ -101,17 +107,16 @@ namespace DiplomaStorage
                 OnAddDiplomaStatement(fileDialog.FileName);
         }
 
-        public void OnAddDiplomaStatement(string path)
+        public  void OnAddDiplomaStatement(string path)
         {
-            AddDiplomaVisibleControl.New.statement =
+                AddDiplomaVisibleControl.New.statement =
             DataContext.Add_File(File.ReadAllBytes(path), Path.GetExtension(path)).First().id;
         }
 
-        public void OnAddDiplomaData(string path)
+        public  void OnAddDiplomaData(string path)
         {
-            AddDiplomaVisibleControl.New.data =
-            DataContext.Add_File(File.ReadAllBytes(path), Path.GetExtension(path)).First().id.Value;
-
+                AddDiplomaVisibleControl.New.data =
+                DataContext.Add_File(File.ReadAllBytes(path), Path.GetExtension(path)).First().id.Value;
         }
 
         private void OnAddDiplomaDocumentation()
@@ -123,11 +128,10 @@ namespace DiplomaStorage
                 OnAddDiplomaDocumentation(fileDialog.FileName);
         }
 
-        public void OnAddDiplomaDocumentation(string path)
+        public  void OnAddDiplomaDocumentation(string path)
         {
-            AddDiplomaVisibleControl.New.documentation =
+                AddDiplomaVisibleControl.New.documentation =
                 DataContext.Add_File(File.ReadAllBytes(path), Path.GetExtension(path)).First().id.Value;
-
         }
 
     private void OnAddDiplomaData()
@@ -137,9 +141,9 @@ namespace DiplomaStorage
                 OnAddDiplomaData(fileDialog.FileName);
         }
 
-        public void OnAddDiplomaAnnotation(string path)
+        public  void OnAddDiplomaAnnotation(string path)
         {
-            AddDiplomaVisibleControl.New.annotation =
+                AddDiplomaVisibleControl.New.annotation =
             DataContext.Add_File(File.ReadAllBytes(path), Path.GetExtension(path)).First().id;
         }
 
@@ -152,10 +156,8 @@ namespace DiplomaStorage
                 OnAddDiplomaAnnotation(fileDialog.FileName);
         }
 
-        async private void OnAddDiploma()
+        private void OnAddDiploma()
         {
-            await Task.Run(() =>
-            {
                 try
                 {
                     DataContext.Add_Diploma(
@@ -176,13 +178,13 @@ namespace DiplomaStorage
                         comment: AddDiplomaVisibleControl.New.comment
                         );
                 DataContext.Refresh(RefreshMode.OverwriteCurrentValues, DataContext.Diploms);
-                 ViewDiploms = new ObservableCollection<Diploms>(DataContext.Diploms);
+                 ViewDiploms = new ObservableCollection<Diploms>(DataContext.Diploms.AsParallel());
+                    AddDiplomaVisibleControl.New = new Diploms();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-            });
         }
 
 
@@ -201,7 +203,7 @@ namespace DiplomaStorage
                                AddStudentVisibleControl.New.Group_id
                                 );
                 DataContext.Refresh(RefreshMode.OverwriteCurrentValues, DataContext.Student);
-                Students = new ObservableCollection<Student>(DataContext.Student);
+                Students = new ObservableCollection<Student>(DataContext.Student.AsParallel());
             }
             catch (Exception ex)
             {

@@ -9,6 +9,8 @@
     <ListBox ItemsSource="{Binding Diploms}">
         <ListBox.ItemTemplate>
             <DataTemplate>
+                <StackPanel>
+                    
                 <StackPanel Orientation="Horizontal">
                     <StackPanel>
                         <TextBlock Text="{Binding Student.Group.Fnumber}" HorizontalAlignment="Center" />
@@ -32,6 +34,20 @@
                                                 Command="{Binding DataContext.OpenDiploma, ElementName=userControl}"
                                                 CommandParameter="{Binding}" />
                     </Grid>
+                </StackPanel>
+                    <ListView BorderBrush="{x:Null}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Style.Triggers>
+                                    <Trigger Property="Content" Value="">
+                                        <Setter Property="Visibility"  Value="Collapsed"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListViewItem Content="{Binding AnnotationNullString}"/>
+                        <ListViewItem Content="{Binding StatementNullString}"/>
+                    </ListView>
                 </StackPanel>
             </DataTemplate>
         </ListBox.ItemTemplate>

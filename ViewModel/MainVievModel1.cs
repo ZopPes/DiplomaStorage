@@ -17,11 +17,6 @@ namespace DiplomaStorage
         #region Prop
 
 
-        #region IsOpenDiplomaLOading
-        private bool isOpenDiplomaLOading;
-        /// <summary>MyComment</summary>
-        public bool IsOpenDiplomaLOading { get => isOpenDiplomaLOading; set => isOpenDiplomaLOading = value; }
-        #endregion
 
         public DiplomaStorageDataContext DataContext { get; set; }
 
@@ -135,17 +130,16 @@ namespace DiplomaStorage
 
         private void InitializeComponent()
         {
-            //Authorization authorization = new Authorization();
-            //if (authorization.ShowDialog() == true)
-            //{
-            //    IsConnect = true;
-            //    DataContext = new DiplomaStorageDataContext(authorization.sql);
-            //}
-            //else
-            //{
-            //    Application.Current.Shutdown();
-            //return;
-            //}
+            Authorization authorization = new Authorization();
+            if (authorization.ShowDialog() == true)
+            {
+                DataContext = new DiplomaStorageDataContext(authorization.sql);
+            }
+            else
+            {
+                Application.Current.Shutdown();
+                return;
+            }
 
             DataContext = new DiplomaStorageDataContext();
 
